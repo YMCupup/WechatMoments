@@ -14,6 +14,7 @@
 		794B37FE24F9072A002C8094 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 794B37FC24F9072A002C8094 /* LaunchScreen.storyboard */; };
 		794B380124F9072A002C8094 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 794B380024F9072A002C8094 /* main.m */; };
 		794B380C24F91EF2002C8094 /* MonmentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 794B380B24F91EF2002C8094 /* MonmentsViewController.m */; };
+		794B381324F9F9B1002C8094 /* MonmentsHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794B381224F9F9B1002C8094 /* MonmentsHeadView.m */; };
 		7F810DDE823F7F941F45C180 /* Pods_WechatMoments.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B95045387C28D0E89478AC06 /* Pods_WechatMoments.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,9 @@
 		794B380024F9072A002C8094 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		794B380A24F91EF2002C8094 /* MonmentsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonmentsViewController.h; sourceTree = "<group>"; };
 		794B380B24F91EF2002C8094 /* MonmentsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonmentsViewController.m; sourceTree = "<group>"; };
+		794B381024F9F204002C8094 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		794B381124F9F9B1002C8094 /* MonmentsHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MonmentsHeadView.h; sourceTree = "<group>"; };
+		794B381224F9F9B1002C8094 /* MonmentsHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonmentsHeadView.m; sourceTree = "<group>"; };
 		B95045387C28D0E89478AC06 /* Pods_WechatMoments.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WechatMoments.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E863FE67014229452983B78C /* Pods-WechatMoments.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WechatMoments.release.xcconfig"; path = "Target Support Files/Pods-WechatMoments/Pods-WechatMoments.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,11 +87,14 @@
 				794B37F524F90729002C8094 /* ViewController.m */,
 				794B380A24F91EF2002C8094 /* MonmentsViewController.h */,
 				794B380B24F91EF2002C8094 /* MonmentsViewController.m */,
+				794B381124F9F9B1002C8094 /* MonmentsHeadView.h */,
+				794B381224F9F9B1002C8094 /* MonmentsHeadView.m */,
 				794B37F724F90729002C8094 /* Main.storyboard */,
 				794B37FA24F9072A002C8094 /* Assets.xcassets */,
 				794B37FC24F9072A002C8094 /* LaunchScreen.storyboard */,
 				794B37FF24F9072A002C8094 /* Info.plist */,
 				794B380024F9072A002C8094 /* main.m */,
+				794B381024F9F204002C8094 /* PrefixHeader.pch */,
 			);
 			path = WechatMoments;
 			sourceTree = "<group>";
@@ -214,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				794B381324F9F9B1002C8094 /* MonmentsHeadView.m in Sources */,
 				794B37F624F90729002C8094 /* ViewController.m in Sources */,
 				794B380C24F91EF2002C8094 /* MonmentsViewController.m in Sources */,
 				794B37F024F90729002C8094 /* AppDelegate.m in Sources */,
@@ -359,6 +367,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = /Users/yl/Desktop/WechatMoments/WechatMoments/PrefixHeader.pch;
 				INFOPLIST_FILE = WechatMoments/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -376,6 +386,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = /Users/yl/Desktop/WechatMoments/WechatMoments/PrefixHeader.pch;
 				INFOPLIST_FILE = WechatMoments/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
