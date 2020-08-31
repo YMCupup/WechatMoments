@@ -8,7 +8,9 @@ use_frameworks!
   # 这个是 cocoapods 升级 1.0 后必须的
  #  MyApp 就是 TARGET NAME
 target 'WechatMoments' do
-pod 'AFNetworking'
-pod 'SDWebImage'
+pod 'SDWebImage', :git => 'https://github.com/rs/SDWebImage.git'
 pod 'Masonry'
+pod 'MJRefresh'
+pod 'YYKit'
+pod 'MJExtension'
 end
