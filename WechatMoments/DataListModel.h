@@ -16,9 +16,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic ,strong)NSArray *images;
 @property (nonatomic ,strong)UserInfoModel *sender;
 @property (nonatomic ,strong)NSArray *comments;
+@property (nonatomic ,strong)NSArray *commentModels;
+@property (nonatomic ,strong)NSMutableArray *commentHeights;
 
 @property (nonatomic ,assign)CGFloat cellHeight;
+@property (nonatomic ,assign)CGFloat textHeight;
 @property (nonatomic ,assign)CGFloat imageHeight;
+@property (nonatomic ,assign)CGFloat commentsHeight;
 - (void)CalculateHeightAndPicture;
 @end
 

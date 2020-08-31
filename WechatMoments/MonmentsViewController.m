@@ -13,16 +13,19 @@
 @interface MonmentsViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic ,strong)UITableView *tableview;
 @property (nonatomic ,strong)NSMutableArray *dataArray;
+@property (nonatomic ,strong)NSMutableArray *showArray;
 @property (nonatomic ,strong)MonmentsHeadView *headview;
 
 @property (nonatomic ,strong)UserInfoModel * userModel;
 
+@property (nonatomic ,assign)NSInteger page;
 @end
 
 @implementation MonmentsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.page = 0;
     self.title = @"朋友圈";
     self.view.backgroundColor = [UIColor whiteColor];
     [self buildTheMainPage];
@@ -59,21 +62,62 @@
     NSData *data = [NSData dataNamed:[NSString stringWithFormat:@"datalist.json"]];
     NSArray *dataary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:NULL];
     NSArray *listArray = [DataListModel mj_objectArrayWithKeyValuesArray:dataary];
+    NSMutableArray *lastary = [NSMutableArray arrayWithArray:listArray];
     for (DataListModel * listmodel in listArray) {
+        if (!listmodel.sender){
+            [lastary removeObject:listmodel];
+        }
+    }
+    for (DataListModel * listmodel in lastary) {
         [listmodel CalculateHeightAndPicture];
     }
-    [self.dataArray addObjectsFromArray:listArray];
+    [self.dataArray addObjectsFromArray:lastary];
+    [self determineifexceedsthearray];
     [self.tableview reloadData];
 }
 
 
 
 - (void)refreshData{
+    self.page = 0;
+    [self.showArray removeAllObjects];
+    [self determineifexceedsthearray];
+    [self.tableview.mj_header endRefreshing];
+    [self.tableview.mj_footer endRefreshing];
+    [self.tableview reloadData];
 }
 
 - (void)loadMoreData{
+    self.page++;
+    [self.showArray removeAllObjects];
+    if ([self determineifexceedsthearray]){
+        [self.tableview.mj_footer endRefreshingWithNoMoreData];
+    }else{
+        [self.tableview.mj_footer endRefreshing];
+    }
+    [self.tableview reloadData];
 }
 
+
+- (BOOL )determineifexceedsthearray {
+    BOOL isallow = NO;
+    if ((self.page + 1) * 5 > self.dataArray.count) {
+        isallow = YES;
+    }
+    
+    for (int i = 0;i < self.dataArray.count ; i ++) {
+        if (isallow){
+            DataListModel * listmodel = self.dataArray[i];
+            [self.showArray addObject:listmodel];
+        }else{
+            if (i < (self.page + 1) * 5){
+                DataListModel * listmodel = self.dataArray[i];
+                [self.showArray addObject:listmodel];
+            }
+        }
+    }
+    return isallow;
+}
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource
 //分区，组数
@@ -82,13 +126,13 @@
 }
 //每个分区的行数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.dataArray.count;
+    return self.showArray.count;
 }
 ////每个单元格的内容
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MonmentsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MonmentsTableViewCell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;//点击无反应
-    DataListModel * model = self.dataArray[indexPath.row];
+    DataListModel * model = self.showArray[indexPath.row];
     cell.model = model;
     return cell;
 }
@@ -97,7 +141,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DataListModel * model = self.dataArray[indexPath.row];
+    DataListModel * model = self.showArray[indexPath.row];
     return model.cellHeight;
 }
 
@@ -114,4 +158,12 @@
     }
     return _dataArray;
 }
+
+- (NSMutableArray *)showArray{
+    if (!_showArray){
+        _showArray = [NSMutableArray array];
+    }
+    return _showArray;
+}
+
 @end
